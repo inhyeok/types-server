@@ -19,5 +19,4 @@ export class TaskType {
   })
   @Field()
   description: string;
-
 }

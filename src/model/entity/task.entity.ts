@@ -1,9 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
 import { TaskType } from "../type/task.type";
 
+import { Comment } from "./comment.entity";
+
 @Entity()
-@ObjectType({ description: "TaskList" })
+@ObjectType({ description: "Task Type" })
 export class Task extends TaskType {
   @PrimaryGeneratedColumn({
     unsigned: true
@@ -28,4 +30,7 @@ export class Task extends TaskType {
   })
   @Field()
   deleted_at: number;
+
+  @OneToMany(type => Comment, comment => comment.task)
+  comments: Comment[];
 }
