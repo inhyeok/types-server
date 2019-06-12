@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
-import { ObjectType, Field, Int } from "type-graphql";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
+import { ObjectType, Field, Int, Root } from "type-graphql";
 import { TaskType } from "../type/task.type";
 
 import { Comment } from "./comment.entity";
@@ -19,7 +19,7 @@ export class Task extends TaskType {
     default: false,
   })
   @Field()
-  is_done: boolean;
+  isDone: boolean;
 
   @Column({
     type: "int",
@@ -28,8 +28,7 @@ export class Task extends TaskType {
     nullable: false,
     default: 0,
   })
-  @Field()
-  deleted_at: number;
+  deletedAt: number;
 
   @OneToMany(type => Comment, comment => comment.task)
   comments: Comment[];

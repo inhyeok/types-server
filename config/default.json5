@@ -7,7 +7,7 @@
     username: "root",
     password: "",
     database: "types-server",
-    synchronize: true,
+    synchronize: true, // entity로 DB sync
     logger: "advanced-console",
     logging: "all",
   }

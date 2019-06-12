@@ -1,18 +1,19 @@
-import { Resolver, Query, Mutation, Arg } from "type-graphql";
+import { Resolver, Query, Mutation, Arg, Int, FieldResolver, Root } from "type-graphql";
 import { Task } from "../model/entity/task.entity";
-import TaskService from "../service/task.service";
 import { TaskType } from "../model/type/task.type";
 
-@Resolver()
-class TaskResolver {
-  constructor() {}
+import TaskService from "../service/task.service";
+import CommentService from "../service/comment.service";
+import { Comment } from "../model/entity/comment.entity";
 
+@Resolver(type => Task)
+class TaskResolver {
   @Query(returns => [Task])
   async getTaskList(
-    @Arg("is_done", type => Boolean, { nullable: true }) is_done?: boolean
+    @Arg("isDone", type => Boolean, { nullable: true }) isDone?: boolean
   ) {
     const taskService = new TaskService();
-    return taskService.getTaskList(is_done);
+    return taskService.getTaskList(isDone);
   }
 
   @Mutation(type => Task)
@@ -25,7 +26,7 @@ class TaskResolver {
 
   @Mutation(type => Boolean)
   async updateTask(
-    @Arg("id", type => Number, { nullable: false }) id: number,
+    @Arg("id", type => Int, { nullable: false }) id: number,
     @Arg("data", type => TaskType, { nullable: false }) data: TaskType
   ) {
     const taskService = new TaskService();
@@ -34,18 +35,24 @@ class TaskResolver {
 
   @Mutation(type => Boolean)
   async updateStatusTask(
-    @Arg("id", type => Number, { nullable: false }) id: number,
-    @Arg("is_done", type => Boolean, { nullable: false }) is_done: boolean
+    @Arg("id", type => Int, { nullable: false }) id: number,
+    @Arg("isDone", type => Boolean, { nullable: false }) isDone: boolean
   ) {
     const taskService = new TaskService();
-    return taskService.updateStatusTask(id, is_done);
+    return taskService.updateStatusTask(id, isDone);
   }
 
   @Mutation(type => Boolean)
   async deleteTask(
-    @Arg("id", type => Number, { nullable: false }) id: number
+    @Arg("id", type => Int, { nullable: false }) id: number
   ) {
     const taskService = new TaskService();
     return taskService.deleteTask(id);
+  }
+
+  @FieldResolver(returns => [Comment])
+  comments(@Root() task: Task): Promise<Comment[]> {
+    const commentService = new CommentService();
+    return commentService.getTaskCommentList(task.id);
   }
 }

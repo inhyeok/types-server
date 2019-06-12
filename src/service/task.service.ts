@@ -8,9 +8,9 @@ import { TaskType } from "../model/type/task.type";
 export default class TaskService {
   constructor() {}
 
-  getTaskList(is_done?: boolean) {
+  getTaskList(isDone?: boolean) {
     const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.getTaskList(is_done);
+    return taskRepository.getTaskList(isDone);
   }
 
   insertTask(data: TaskType) {
@@ -23,9 +23,9 @@ export default class TaskService {
     return taskRepository.updateTask(id, data);
   }
 
-  updateStatusTask(id: number, is_done: boolean) {
+  updateStatusTask(id: number, isDone: boolean) {
     const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.updateStatusTask(id, is_done);
+    return taskRepository.updateStatusTask(id, isDone);
   }
 
   deleteTask(id: number) {

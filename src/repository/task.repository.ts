@@ -6,12 +6,12 @@ import { TaskType } from "../model/type/task.type";
 // @Service()
 @EntityRepository(Task)
 export default class TaskRepository extends Repository<Task> {
-  public async getTaskList(is_done?: boolean) {
+  public async getTaskList(isDone?: boolean) {
     const where: FindOneOptions["where"] = {
-      deleted_at: 0
+      deletedAt: 0
     };
-    if (is_done === true || is_done === false) {
-      where.is_done = is_done;
+    if (isDone === true || isDone === false) {
+      where.isDone = isDone;
     }
     return this.find({
       where
@@ -28,15 +28,15 @@ export default class TaskRepository extends Repository<Task> {
     return true;
   }
 
-  public async updateStatusTask(id: number, is_done: boolean) {
-    await this.update(id, { is_done });
+  public async updateStatusTask(id: number, isDone: boolean) {
+    await this.update(id, { isDone });
     return true;
   }
 
   public async deleteTask(id: number) {
     // await this.delete(id);
-    const deleted_at = +String(new Date().getTime()).substring(0, 10);
-    await this.update(id, { deleted_at });
+    const deletedAt = +String(new Date().getTime()).substring(0, 10);
+    await this.update(id, { deletedAt });
     return true;
   }
 }

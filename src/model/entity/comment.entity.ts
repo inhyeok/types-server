@@ -20,7 +20,7 @@ export class Comment extends CommentType {
     default: 0,
   })
   @Field(type => Int!)
-  task_id: number;
+  taskId: number;
 
   @Column({
     type: "boolean",
@@ -28,7 +28,7 @@ export class Comment extends CommentType {
     default: false
   })
   @Field()
-  is_pin: boolean;
+  isPin: boolean;
 
   @Column({
     type: "int",
@@ -38,7 +38,7 @@ export class Comment extends CommentType {
     default: 0,
   })
   @Field()
-  deleted_at: number;
+  deletedAt: number;
 
   @ManyToOne(type => Task, task => task.comments)
   task: Task;
