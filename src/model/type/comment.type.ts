@@ -3,11 +3,11 @@ import { ObjectType, InputType, Field } from "type-graphql";
 
 @ObjectType()
 @InputType("CommentInputType")
-export class CommentType {
+export default class CommentType {
   @Column({
     type: "text",
     nullable: false
   })
   @Field()
-  message: string;
+  comment: string;
 }

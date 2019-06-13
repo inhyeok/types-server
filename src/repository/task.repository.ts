@@ -1,11 +1,17 @@
 import { Service } from "typedi";
-import { EntityRepository, Repository, FindOneOptions } from "typeorm";
-import { Task } from "../model/entity/task.entity";
-import { TaskType } from "../model/type/task.type";
+import { Connection, EntityRepository, Repository, FindOneOptions, getConnection } from "typeorm";
+import Task from "../model/entity/task.entity";
+import TaskType from "../model/type/task.type";
 
-// @Service()
+@Service()
 @EntityRepository(Task)
 export default class TaskRepository extends Repository<Task> {
+  private connection: Connection;
+  constructor() {
+    super();
+    this.connection = getConnection();
+  }
+
   public async getTaskList(isDone?: boolean) {
     const where: FindOneOptions["where"] = {
       deletedAt: 0

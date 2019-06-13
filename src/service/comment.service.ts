@@ -1,30 +1,30 @@
 import { Service } from "typedi";
-import { getCustomRepository } from "typeorm";
+import { InjectRepository } from "typeorm-typedi-extensions";
 
 import CommentRepository from "../repository/comment.repository";
-import { CommentType } from "../model/type/comment.type";
+import CommentType from "../model/type/comment.type";
 
-// @Service()
+@Service()
 export default class CommentService {
-  constructor() {}
+  @InjectRepository() private readonly commentRepository: CommentRepository;
 
   getTaskCommentList(taskId: number) {
-    const commentRepository = getCustomRepository(CommentRepository);
-    return commentRepository.getTaskCommentList(taskId);
+    return this.commentRepository.getTaskCommentList(taskId);
   }
 
-  insertComment(data: CommentType) {
-    const commentRepository = getCustomRepository(CommentRepository);
-    return commentRepository.insertComment(data);
+  insertComment(taskId: number, comment: string) {
+    return this.commentRepository.insertComment(taskId, comment);
   }
 
-  updateComment(id: number, data: CommentType) {
-    const commentRepository = getCustomRepository(CommentRepository);
-    return commentRepository.updateComment(id, data);
+  updateComment(id: number, comment: string) {
+    return this.commentRepository.updateComment(id, comment);
   }
 
   deleteComment(id: number) {
-    const commentRepository = getCustomRepository(CommentRepository);
-    return commentRepository.deleteComment(id);
+    return this.commentRepository.deleteComment(id);
+  }
+
+  pinComment(id: number, isPin: boolean) {
+    return this.commentRepository.pinComment(id, isPin);
   }
 }

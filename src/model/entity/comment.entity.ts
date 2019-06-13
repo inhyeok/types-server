@@ -1,11 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
-import { CommentType } from "../type/comment.type";
-import { Task } from "./task.entity";
+import CommentType from "../type/comment.type";
+import Task from "./task.entity";
 
 @Entity()
 @ObjectType({ description: "Task Comment Type" })
-export class Comment extends CommentType {
+export default class Comment extends CommentType {
   @PrimaryGeneratedColumn({
     unsigned: true
   })

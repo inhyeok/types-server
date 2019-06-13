@@ -1,10 +1,13 @@
 import "reflect-metadata";
 import * as config from "config";
-import { createConnection } from "typeorm";
+import { Container } from "typedi";
+import { createConnection, useContainer } from "typeorm";
 import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
 
 const PORT = config.get("port") || 4000;
+
+useContainer(Container);
 
 (async () => {
   try {
@@ -17,6 +20,7 @@ const PORT = config.get("port") || 4000;
 
     const schema = await buildSchema({
       resolvers: [__dirname + "/resolver/**/*.resolver.ts"],
+      container: Container,
     });
 
     const server = new ApolloServer({

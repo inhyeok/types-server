@@ -1,35 +1,30 @@
 import { Service } from "typedi";
-import { getCustomRepository } from "typeorm";
+import { InjectRepository } from "typeorm-typedi-extensions";
 
 import TaskRepository from "../repository/task.repository";
-import { TaskType } from "../model/type/task.type";
+import TaskType from "../model/type/task.type";
 
-// @Service()
+@Service()
 export default class TaskService {
-  constructor() {}
+  @InjectRepository() private readonly taskRepository: TaskRepository;
 
   getTaskList(isDone?: boolean) {
-    const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.getTaskList(isDone);
+    return this.taskRepository.getTaskList(isDone);
   }
 
   insertTask(data: TaskType) {
-    const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.insertTask(data);
+    return this.taskRepository.insertTask(data);
   }
 
   updateTask(id: number, data: TaskType) {
-    const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.updateTask(id, data);
+    return this.taskRepository.updateTask(id, data);
   }
 
   updateStatusTask(id: number, isDone: boolean) {
-    const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.updateStatusTask(id, isDone);
+    return this.taskRepository.updateStatusTask(id, isDone);
   }
 
   deleteTask(id: number) {
-    const taskRepository = getCustomRepository(TaskRepository);
-    return taskRepository.deleteTask(id);
+    return this.taskRepository.deleteTask(id);
   }
 }
