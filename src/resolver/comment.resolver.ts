@@ -1,7 +1,9 @@
 import { Inject } from "typedi";
 import { Resolver, Mutation, Arg, Int } from "type-graphql";
-import Comment from "../model/entity/comment.entity";
+
 import CommentService from "../service/comment.service";
+
+import Comment from "../model/entity/comment.entity";
 
 @Resolver(type => Comment)
 export class CommentResolver {

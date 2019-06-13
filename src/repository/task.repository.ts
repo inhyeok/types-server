@@ -1,16 +1,15 @@
 import { Service } from "typedi";
-import { Connection, EntityRepository, Repository, FindOneOptions, getConnection } from "typeorm";
+import { Connection, EntityRepository, Repository, FindOneOptions } from "typeorm";
+import { InjectConnection } from "typeorm-typedi-extensions";
+import { BaseRepository } from "typeorm-transactional-cls-hooked";
+
 import Task from "../model/entity/task.entity";
 import TaskType from "../model/type/task.type";
 
 @Service()
 @EntityRepository(Task)
-export default class TaskRepository extends Repository<Task> {
-  private connection: Connection;
-  constructor() {
-    super();
-    this.connection = getConnection();
-  }
+export default class TaskRepository extends BaseRepository<Task> {
+  @InjectConnection() private readonly connection: Connection;
 
   public async getTaskList(isDone?: boolean) {
     const where: FindOneOptions["where"] = {

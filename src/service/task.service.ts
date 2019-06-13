@@ -2,6 +2,7 @@ import { Service } from "typedi";
 import { InjectRepository } from "typeorm-typedi-extensions";
 
 import TaskRepository from "../repository/task.repository";
+
 import TaskType from "../model/type/task.type";
 
 @Service()

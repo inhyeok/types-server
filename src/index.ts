@@ -4,9 +4,11 @@ import { Container } from "typedi";
 import { createConnection, useContainer } from "typeorm";
 import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
+import { initializeTransactionalContext } from "typeorm-transactional-cls-hooked";
 
 const PORT = config.get("port") || 4000;
 
+initializeTransactionalContext();
 useContainer(Container);
 
 (async () => {

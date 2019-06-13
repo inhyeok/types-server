@@ -2,7 +2,6 @@ import { Service } from "typedi";
 import { InjectRepository } from "typeorm-typedi-extensions";
 
 import CommentRepository from "../repository/comment.repository";
-import CommentType from "../model/type/comment.type";
 
 @Service()
 export default class CommentService {

@@ -1,11 +1,12 @@
 import { Inject } from "typedi";
 import { Resolver, Query, Mutation, Arg, Int, FieldResolver, Root } from "type-graphql";
-import Task from "../model/entity/task.entity";
-import TaskType from "../model/type/task.type";
 
 import TaskService from "../service/task.service";
 import CommentService from "../service/comment.service";
+
 import Comment from "../model/entity/comment.entity";
+import Task from "../model/entity/task.entity";
+import TaskType from "../model/type/task.type";
 
 @Resolver(type => Task)
 class TaskResolver {

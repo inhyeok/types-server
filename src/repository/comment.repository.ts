@@ -1,16 +1,15 @@
 import { Service } from "typedi";
-import { Connection, EntityRepository, Repository, FindOneOptions, getConnection } from "typeorm";
+import { Connection, EntityRepository, FindOneOptions } from "typeorm";
+import { InjectConnection } from "typeorm-typedi-extensions";
+import { BaseRepository } from "typeorm-transactional-cls-hooked";
+
 import Comment from "../model/entity/comment.entity";
-import CommentType from "../model/type/comment.type";
 
 @Service()
 @EntityRepository(Comment)
-export default class CommentRepository extends Repository<Comment> {
-  private connection: Connection;
-  constructor() {
-    super();
-    this.connection = getConnection();
-  }
+export default class CommentRepository extends BaseRepository<Comment> {
+  @InjectConnection() private readonly connection: Connection;
+
   public async getTaskCommentList(taskId: number) {
     const where: FindOneOptions["where"] = {
       taskId,
