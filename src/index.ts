@@ -1,12 +1,15 @@
 import "reflect-metadata";
+import * as express from "express";
 import * as config from "config";
 import { Container } from "typedi";
 import { createConnection, useContainer } from "typeorm";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { initializeTransactionalContext } from "typeorm-transactional-cls-hooked";
 
-const PORT = config.get("port") || 4000;
+const app = express();
+const path = "/";
+const port = config.get("port") || 4000;
 
 initializeTransactionalContext();
 useContainer(Container);
@@ -27,12 +30,17 @@ useContainer(Container);
 
     const server = new ApolloServer({
       schema,
-      playground: true,
+      context: (context) => context,
+      // playground: true,
+      playground: process.env.NODE_ENV !== "production",
     });
 
+    server.applyMiddleware({ app, path });
+
     // Start the server
-    const { url } = await server.listen(PORT);
-    console.log(`Server is running, GraphQL Playground available at ${url}`);
+    app.listen({ port }, () => {
+      console.log(`Server is running, GraphQL Playground available at http://localhost:${port}`);
+    });
   }
   catch(err) {
     console.error(err);
