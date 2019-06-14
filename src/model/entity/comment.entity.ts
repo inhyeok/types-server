@@ -1,11 +1,11 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { ObjectType, Field, Int } from "type-graphql";
-import CommentType from "../type/comment.type";
+
 import Task from "./task.entity";
 
 @Entity()
 @ObjectType({ description: "Task Comment Type" })
-export default class Comment extends CommentType {
+export default class Comment {
   @PrimaryGeneratedColumn({
     unsigned: true,
   })
@@ -29,6 +29,13 @@ export default class Comment extends CommentType {
   })
   @Field()
   isPin: boolean;
+
+  @Column({
+    type: "text",
+    nullable: false,
+  })
+  @Field()
+  comment: string;
 
   @Column({
     type: "int",

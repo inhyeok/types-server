@@ -1,13 +1,10 @@
-import { Column } from "typeorm";
 import { ObjectType, InputType, Field } from "type-graphql";
+
+import Comment from "../entity/comment.entity";
 
 @ObjectType()
 @InputType("CommentInputType")
-export default class CommentType {
-  @Column({
-    type: "text",
-    nullable: false,
-  })
+export default class CommentType implements Partial<Comment>{
   @Field()
   comment: string;
 }

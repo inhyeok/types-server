@@ -1,12 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
-import { ObjectType, Field, Int, Root } from "type-graphql";
-import TaskType from "../type/task.type";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { ObjectType, Field, Int } from "type-graphql";
 
 import Comment from "./comment.entity";
 
 @Entity()
 @ObjectType({ description: "Task Type" })
-export default class Task extends TaskType {
+export default class Task {
   @PrimaryGeneratedColumn({
     unsigned: true,
   })
@@ -20,6 +19,22 @@ export default class Task extends TaskType {
   })
   @Field()
   isDone: boolean;
+
+  @Column({
+    type: "char",
+    length: 30,
+    nullable: false,
+    default: "",
+  })
+  @Field()
+  title: string;
+
+  @Column({
+    type: "text",
+    nullable: false,
+  })
+  @Field()
+  description: string;
 
   @Column({
     type: "int",
