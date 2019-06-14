@@ -1,0 +1,25 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"globals": {
+		"Atomics": "readonly",
+		"SharedArrayBuffer": "readonly"
+	},
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint/tslint"
+	],
+	"parserOptions": {
+		"ecmaVersion": 2018,
+		"sourceType": "module",
+		"project": "./tsconfig.json",
+		"tsconfigRootDir": "./src"
+	},
+	"rules": {
+		"@typescript-eslint/tslint/config": ["warn", {
+      "lintFile": "./tslint.json"
+    }]
+	}
+}

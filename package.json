@@ -6,7 +6,8 @@
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "start": "NODE_ENV=production ts-node src/index.ts",
-      "start:dev": "NODE_ENV=development nodemon src/index.ts"
+      "start:dev": "NODE_ENV=development nodemon src/index.ts",
+      "lint": "tslint \"**/*.ts\" -e \"node_modules/**\""
    },
    "keywords": [],
    "author": "",
@@ -28,6 +29,9 @@
    },
    "devDependencies": {
       "@types/node": "^8.0.29",
+      "@typescript-eslint/eslint-plugin-tslint": "^1.10.2",
+      "@typescript-eslint/parser": "^1.10.2",
+      "eslint": "^5.16.0",
       "nodemon": "^1.19.1",
       "ts-node": "3.3.0",
       "typescript": "3.3.3333"
