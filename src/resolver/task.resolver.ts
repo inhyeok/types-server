@@ -15,14 +15,14 @@ class TaskResolver {
 
   @Query(returns => [Task])
   async getTaskList(
-    @Arg("isDone", type => Boolean, { nullable: true }) isDone?: boolean
+    @Arg("isDone", type => Boolean, { nullable: true }) isDone?: boolean,
   ) {
     return this.taskService.getTaskList(isDone);
   }
 
   @Mutation(type => Task)
   async insertTask(
-    @Arg("data", type => TaskType, { nullable: false }) data: TaskType
+    @Arg("data", type => TaskType, { nullable: false }) data: TaskType,
   ) {
     return this.taskService.insertTask(data);
   }
@@ -30,7 +30,7 @@ class TaskResolver {
   @Mutation(type => Boolean)
   async updateTask(
     @Arg("id", type => Int, { nullable: false }) id: number,
-    @Arg("data", type => TaskType, { nullable: false }) data: TaskType
+    @Arg("data", type => TaskType, { nullable: false }) data: TaskType,
   ) {
     return this.taskService.updateTask(id, data);
   }
@@ -38,14 +38,14 @@ class TaskResolver {
   @Mutation(type => Boolean)
   async updateStatusTask(
     @Arg("id", type => Int, { nullable: false }) id: number,
-    @Arg("isDone", type => Boolean, { nullable: false }) isDone: boolean
+    @Arg("isDone", type => Boolean, { nullable: false }) isDone: boolean,
   ) {
     return this.taskService.updateStatusTask(id, isDone);
   }
 
   @Mutation(type => Boolean)
   async deleteTask(
-    @Arg("id", type => Int, { nullable: false }) id: number
+    @Arg("id", type => Int, { nullable: false }) id: number,
   ) {
     return this.taskService.deleteTask(id);
   }

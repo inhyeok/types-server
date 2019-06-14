@@ -13,10 +13,10 @@ export default class CommentRepository extends BaseRepository<Comment> {
   public async getTaskCommentList(taskId: number) {
     const where: FindOneOptions["where"] = {
       taskId,
-      deletedAt: 0
+      deletedAt: 0,
     };
     return this.find({
-      where
+      where,
     });
   }
 
@@ -44,7 +44,7 @@ export default class CommentRepository extends BaseRepository<Comment> {
 
   public async pinComment(id: number, isPin: boolean) {
     await this.update(id, {
-      isPin
+      isPin,
     });
     return true;
   }

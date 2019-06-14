@@ -7,7 +7,7 @@ import Task from "./task.entity";
 @ObjectType({ description: "Task Comment Type" })
 export default class Comment extends CommentType {
   @PrimaryGeneratedColumn({
-    unsigned: true
+    unsigned: true,
   })
   @Field(type => Int!)
   id: number;
@@ -25,7 +25,7 @@ export default class Comment extends CommentType {
   @Column({
     type: "boolean",
     nullable: false,
-    default: false
+    default: false,
   })
   @Field()
   isPin: boolean;

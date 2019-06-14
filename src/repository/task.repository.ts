@@ -13,13 +13,13 @@ export default class TaskRepository extends BaseRepository<Task> {
 
   public async getTaskList(isDone?: boolean) {
     const where: FindOneOptions["where"] = {
-      deletedAt: 0
+      deletedAt: 0,
     };
     if (isDone === true || isDone === false) {
       where.isDone = isDone;
     }
     return this.find({
-      where
+      where,
     });
   }
 

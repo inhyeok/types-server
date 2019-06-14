@@ -6,7 +6,7 @@ import { ObjectType, InputType, Field } from "type-graphql";
 export default class CommentType {
   @Column({
     type: "text",
-    nullable: false
+    nullable: false,
   })
   @Field()
   comment: string;

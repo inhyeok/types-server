@@ -8,7 +8,7 @@ import Comment from "./comment.entity";
 @ObjectType({ description: "Task Type" })
 export default class Task extends TaskType {
   @PrimaryGeneratedColumn({
-    unsigned: true
+    unsigned: true,
   })
   @Field(type => Int!)
   id: number;

@@ -19,7 +19,7 @@ useContainer(Container);
     await createConnection({
       ...config.get("database"),
       entities: [
-        __dirname + "/model/entity/**/*.entity.ts"
+        __dirname + "/model/entity/**/*.entity.ts",
       ],
     });
 
@@ -42,7 +42,7 @@ useContainer(Container);
       console.log(`Server is running, GraphQL Playground available at http://localhost:${port}`);
     });
   }
-  catch(err) {
+  catch (err) {
     console.error(err);
   }
 })();
